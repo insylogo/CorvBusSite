@@ -118,7 +118,8 @@ namespace CorvallisTransit.Components
 
 
                 var pattern = route.SelectMany(r => r.Destination)
-                                   .Select(d => d.Pattern.Where(p => p.Name.Equals(route.Key, StringComparison.CurrentCultureIgnoreCase)))
+                                   .Select(d => d.Pattern?.Where(p => p.Name.Equals(route.Key, StringComparison.CurrentCultureIgnoreCase)))
+                                   .Where(w => w != null)
                                    .SelectMany(pt => pt.SelectMany(pl => pl.Platform.Select(p => p)));
 
                 int stopCount = 0;
